@@ -31,11 +31,14 @@ hadoop fs -rm -r input/HadoopPageRank/wiki/*
 
 //cd ..
 //hadoop fs -copyFromLocal example-wiki.xml input/HadoopPageRank/wiki/wiki.xml
-unzip afwiki-20091002-one-page-per-line.zip
-hadoop fs -copyFromLocal afwiki-20091002-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
 
 unzip scowiki-20090929-one-page-per-line.zip
 hadoop fs -copyFromLocal scowiki-20090929-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
+
+unzip afwiki-20091002-one-page-per-line.zip
+hadoop fs -copyFromLocal afwiki-20091002-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
+
+
 
 unzip afwiki-20091002-one-page-per-line.zip
 hadoop fs -copyFromLocal afwiki-20091002-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
@@ -49,13 +52,27 @@ yarn jar cis833.hadoop-1.0-SNAPSHOT.jar mapreduce.pagerank.PageRankJob
 
 Step 6. When the hadoop execution has completed, you may get your results out from hdfs with the following command:
 hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 1
+
 hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 2
+17.83002        Verenigde_Koninkryk
+17.880821       Gregoriaanse_kalender
+18.177961       Italië
+21.940887       Engels
+22.262438       Rome
+27.93743        Duitsland
+28.428913       provinsie_Soria
+33.871284       Frankryk
+39.76103        Verenigde_State_van_Amerika
+55.79539        Suid-Afrika
+
 hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 3
 tail -n 100 part-r-00000
 tail -n 100 1
 tail -n 100 2
 tail -n 100 3
 cd ..
+
+
 
 Step 7. When your code seems to be working satisfactorily, you should unzip the large xml file with the following command:
 bzip2 -dk nlwiki-latest-pages-articles.xml.bz2
