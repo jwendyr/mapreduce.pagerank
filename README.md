@@ -45,6 +45,7 @@ hadoop fs -ls input/HadoopPageRank/wiki
 Step 4. Make sure that your the job's output directory in hdfs is clear:
 hadoop fs -rm -r output/HadoopPageRank/*
 
+
 Step 5. Run the hadoop jar with the following command:
 cd target/
 yarn jar cis833.hadoop-1.0-SNAPSHOT.jar mapreduce.pagerank.PageRankJob
@@ -84,10 +85,19 @@ cd ..
 
 
 Step 7. When your code seems to be working satisfactorily, you should unzip the large xml file with the following command:
-bzip2 -dk nlwiki-latest-pages-articles.xml.bz2
+
+hadoop fs -copyFromLocal /homes/dcaragea/WikiProject/* input/HadoopPageRank/wiki
+
+16/11/18 05:05:45 INFO hdfs.DFSClient: Exception in createBlockOutputStream
+java.io.IOException: Bad connect ack with firstBadLink as 10.5.42.12:50010
+        at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.createBlockOutputStream(DFSOutputStream.java:1614)
+        at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.nextBlockOutputStream(DFSOutputStream.java:1512)
+        at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:668)
+16/11/18 05:05:45 INFO hdfs.DFSClient: Abandoning BP-130976981-10.5.3.30-1463579955828:blk_1073791070_85266
+16/11/18 05:05:45 INFO hdfs.DFSClient: Excluding datanode DatanodeInfoWithStorage[10.5.42.12:50010,DS-48aefdc4-724c-4e80-803e-c6e92b5bf2a0,DISK]
+
 Note: This may take some time.
 
 Step 8. Copy the unzipped xml document to the input/HadoopPageRank/wiki directory in hdfs as in step 3.
-
 Step 9. Make sure the output/HadoopPageRank directory in hdfs is clear as in step 4.
 Step 10. Re-run the hadoop job as in step 5.
