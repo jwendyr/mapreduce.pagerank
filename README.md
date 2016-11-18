@@ -29,6 +29,7 @@ Step 3. From your VM, as the user hduser, copy the input file into hdfs with the
 hadoop fs -rm -r input/HadoopPageRank/wiki/*
 //hadoop fs -rm -r input/HadoopPageRank/wiki/wiki.xml
 
+//cd ..
 //hadoop fs -copyFromLocal example-wiki.xml input/HadoopPageRank/wiki/wiki.xml
 unzip afwiki-20091002-one-page-per-line.zip
 hadoop fs -copyFromLocal afwiki-20091002-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
