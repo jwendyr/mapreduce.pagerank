@@ -60,6 +60,9 @@ public class PageRankJob extends Configured implements Tool {
     //Parsing MapReduce Job 1
     public boolean runXmlParsing(String inputPath, String outputPath) throws IOException, ClassNotFoundException, InterruptedException {
         Configuration conf = new Configuration();
+        conf.set("dfs.replication", "1");
+        conf.set("mapreduce.client.submit.file.replication", "1");
+        
         conf.set(XmlInputFormat.START_TAG_KEY, "<page>");
         conf.set(XmlInputFormat.END_TAG_KEY, "</page>");
 
@@ -85,7 +88,9 @@ public class PageRankJob extends Configured implements Tool {
     //Calculation MapReduce Job 2
     private boolean runRankCalculator(String inputPath, String outputPath) throws IOException, ClassNotFoundException, InterruptedException {
         Configuration conf = new Configuration();
-
+        conf.set("dfs.replication", "1");
+        conf.set("mapreduce.client.submit.file.replication", "1");
+        
         Job rankCalculator = Job.getInstance(conf, "rankCalculator");
         rankCalculator.setJarByClass(PageRankJob.class);
 
@@ -105,7 +110,9 @@ public class PageRankJob extends Configured implements Tool {
     //Sorting and sanitization Map Job 3
     private boolean runRankSorter(String inputPath, String outputPath) throws IOException, ClassNotFoundException, InterruptedException {
         Configuration conf = new Configuration();
-
+        conf.set("dfs.replication", "1");
+        conf.set("mapreduce.client.submit.file.replication", "1");
+        
         Job rankOrdering = Job.getInstance(conf, "rankSorter");
         rankOrdering.setJarByClass(PageRankJob.class);
 
