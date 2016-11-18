@@ -38,10 +38,9 @@ hadoop fs -copyFromLocal scowiki-20090929-one-page-per-line input/HadoopPageRank
 unzip afwiki-20091002-one-page-per-line.zip
 hadoop fs -copyFromLocal afwiki-20091002-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
 
-
-
-unzip afwiki-20091002-one-page-per-line.zip
-hadoop fs -copyFromLocal afwiki-20091002-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
+ls /home/dcaragea/WikiProject
+hadoop fs -copyFromLocal /homes/dcaragea/WikiProject/* input/HadoopPageRank/wiki
+hadoop fs -ls input/HadoopPageRank/wiki
 
 Step 4. Make sure that your the job's output directory in hdfs is clear:
 hadoop fs -rm -r output/HadoopPageRank/*
@@ -52,6 +51,16 @@ yarn jar cis833.hadoop-1.0-SNAPSHOT.jar mapreduce.pagerank.PageRankJob
 
 Step 6. When the hadoop execution has completed, you may get your results out from hdfs with the following command:
 hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 1
+5.6457105       Unitit_States
+5.8568          Scots_leid
+5.949724        Northren_Ireland
+7.286911        Europe
+7.5826597       Inglis_leid
+10.499083       Scotland
+10.91714        New_Zealand
+12.002874       Ingland
+13.5375185      Unitit_Kinrick
+14.023736       Republic_o_Ireland
 
 hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 2
 17.83002        Verenigde_Koninkryk
