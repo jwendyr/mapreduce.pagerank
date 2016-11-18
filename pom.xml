@@ -3,13 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!-- Replace the group ID with your group ID -->
-  <groupId>uk.ac.ncl.cs</groupId>
+  <groupId>mapreduce.pagerank</groupId>
   <!-- Replace the artifact ID with the name of your project -->
-  <artifactId>csc8101-hadoop-assignment</artifactId>
+  <artifactId>cis833.hadoop</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <!-- The name should likely match the artifact ID -->
-  <name>csc8101-hadoop-assignment</name>
+  <name>cis833.hadoop</name>
   <url>http://maven.apache.org</url>
 
   <properties>
