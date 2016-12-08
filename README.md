@@ -56,6 +56,7 @@ Checking connectivity... done.
 **Step 6**. When the hadoop execution has completed, you may get your results out from hdfs with the following command:
 
     hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 1
+    tail -n 100 1
 5.6457105       Unitit_States
 5.8568          Scots_leid
 5.949724        Northren_Ireland
@@ -69,6 +70,7 @@ Checking connectivity... done.
 
 
     hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 2
+    tail -n 100 2
 17.83002        Verenigde_Koninkryk
 17.880821       Gregoriaanse_kalender
 18.177961       Italië
@@ -81,13 +83,22 @@ Checking connectivity... done.
 55.79539        Suid-Afrika
 
     hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 3
-    tail -n 100 part-r-00000
-    tail -n 100 1
-    tail -n 100 2
     tail -n 100 3
+761.6818        United_Kingdom
+775.1779        Italy
+902.53705       Canada
+969.6055        France
+972.393         Insect
+1021.9603       Arthropod
+1053.8143       England
+1062.101        Germany
+1086.3003       India
+1447.3062       Animal
+2645.2258       United_States
+
     cd ..
 
-**Step 7**. When your code seems to be working satisfactorily, you should unzip the large xml file with the following command:
+**Step 7**. When your code seems to be working satisfactorily, try large file with the following command:
 
     hadoop fs -copyFromLocal /homes/dcaragea/WikiProject/* input/HadoopPageRank/wiki
 
@@ -101,8 +112,16 @@ java.io.IOException: Bad connect ack with firstBadLink as 10.5.42.12:50010
 
 Note: This may take some time.
 
-**Step 8**. Copy the unzipped xml document to the input/HadoopPageRank/wiki directory in hdfs as in step 3.
+**Step 8**. Spark
 
-**Step 9**. Make sure the output/HadoopPageRank directory in hdfs is clear as in step 4.
-
-**Step 10**. Re-run the hadoop job as in step 5.
+    rm -rf spark.pagerank/
+    git clone https://github.com/jwendyr/spark.pagerank.git
+    cd spark.pagerank/
+    mvn clean package
+    unzip scowiki-20090929-one-page-per-line.zip
+    hadoop fs -copyFromLocal scowiki-20090929-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
+    hadoop fs -rm -r output/HadoopPageRank/*
+    cd target/
+    spark-submit --class com.spark.pagerank.SparkPageRank --master yarn \ sparkpagerank-0.0.1-SNAPSHOT.jar <input>
+    hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 1
+    tail -n 100 1
