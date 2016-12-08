@@ -80,10 +80,13 @@ public class PageLinksParseMapper extends Mapper<LongWritable, Text, Text, Text>
 
         startBody = page.find("<text");
         //Find opening <text> tag, excluding potential attributes
-        startBody = page.find(">", startBody);
         if(startBody > 0) {
-            endBody = page.find("</text>", startBody);
+            startBody = page.find(">", startBody);
+            if(startBody > 0) {
+                endBody = page.find("</text>", startBody);
+            }
         }
+
         
         if(startTitle == -1 || endTitle == -1 || startBody == -1 || endBody == -1) {
             return new String[]{"",""};
