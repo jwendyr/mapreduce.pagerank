@@ -68,15 +68,23 @@ public class PageLinksParseMapper extends Mapper<LongWritable, Text, Text, Text>
 
     private String[] parsePage(Text page) throws CharacterCodingException {
         String[] titleAndBody = new String[2];
-        
-        int startTitle = page.find("<title>");
-        int endTitle = page.find("</title>", startTitle);
+        int startTitle == -1;
+        int endTitle == -1;
+        int startBody == -1;
+        int endBody == -1;
+            
+        startTitle = page.find("<title>");
+        if(startTitle > 0) {
+            endTitle = page.find("</title>", startTitle);
+        }
 
-        int startBody = page.find("<text");
+        startBody = page.find("<text");
         //Find opening <text> tag, excluding potential attributes
         startBody = page.find(">", startBody);
-        int endBody = page.find("</text>", startBody);
-
+        if(startBody > 0) {
+            endBody = page.find("</text>", startBody);
+        }
+        
         if(startTitle == -1 || endTitle == -1 || startBody == -1 || endBody == -1) {
             return new String[]{"",""};
         }
