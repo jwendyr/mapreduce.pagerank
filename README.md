@@ -9,8 +9,8 @@ CIS833
 
 Step 1. Clone this repository with the following command:
 
-rm -rf mapreduce.pagerank/
-git clone https://github.com/jwendyr/mapreduce.pagerank.git
+    rm -rf mapreduce.pagerank/
+    git clone https://github.com/jwendyr/mapreduce.pagerank.git
 
 Cloning into 'mapreduce.pagerank'...
 remote: Counting objects: 234, done.
@@ -22,36 +22,40 @@ Checking connectivity... done.
 
 Step 2. Build your solution by executing the command from the root of your project.
 
-cd mapreduce.pagerank/
-mvn clean package
+    cd mapreduce.pagerank/
+    mvn clean package
 
 Step 3. From your VM, as the user hduser, copy the input file into hdfs with the following command:
-hadoop fs -rm -r input/HadoopPageRank/wiki/*
-//hadoop fs -rm -r input/HadoopPageRank/wiki/wiki.xml
+    
+    hadoop fs -rm -r input/HadoopPageRank/wiki/*
+    //hadoop fs -rm -r input/HadoopPageRank/wiki/wiki.xml
 
-//cd ..
-//hadoop fs -copyFromLocal example-wiki.xml input/HadoopPageRank/wiki/wiki.xml
+    //cd ..
+    //hadoop fs -copyFromLocal example-wiki.xml input/HadoopPageRank/wiki/wiki.xml
 
-unzip scowiki-20090929-one-page-per-line.zip
-hadoop fs -copyFromLocal scowiki-20090929-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
+    unzip scowiki-20090929-one-page-per-line.zip
+    hadoop fs -copyFromLocal scowiki-20090929-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
 
-unzip afwiki-20091002-one-page-per-line.zip
-hadoop fs -copyFromLocal afwiki-20091002-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
+    unzip afwiki-20091002-one-page-per-line.zip
+    hadoop fs -copyFromLocal afwiki-20091002-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
 
-ls /home/dcaragea/WikiProject
-hadoop fs -copyFromLocal /homes/dcaragea/WikiProject/* input/HadoopPageRank/wiki
-hadoop fs -ls input/HadoopPageRank/wiki
+    ls /home/dcaragea/WikiProject
+    hadoop fs -copyFromLocal /homes/dcaragea/WikiProject/* input/HadoopPageRank/wiki
+    hadoop fs -ls input/HadoopPageRank/wiki
 
 Step 4. Make sure that your the job's output directory in hdfs is clear:
-hadoop fs -rm -r output/HadoopPageRank/*
+    
+    hadoop fs -rm -r output/HadoopPageRank/*
 
 
 Step 5. Run the hadoop jar with the following command:
-cd target/
-yarn jar cis833.hadoop-1.0-SNAPSHOT.jar mapreduce.pagerank.PageRankJob
+    
+    cd target/
+    yarn jar cis833.hadoop-1.0-SNAPSHOT.jar mapreduce.pagerank.PageRankJob
 
 Step 6. When the hadoop execution has completed, you may get your results out from hdfs with the following command:
-hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 1
+
+    hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 1
 5.6457105       Unitit_States
 5.8568          Scots_leid
 5.949724        Northren_Ireland
@@ -63,7 +67,8 @@ hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 1
 13.5375185      Unitit_Kinrick
 14.023736       Republic_o_Ireland
 
-hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 2
+
+    hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 2
 17.83002        Verenigde_Koninkryk
 17.880821       Gregoriaanse_kalender
 18.177961       Italië
@@ -75,18 +80,16 @@ hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 2
 39.76103        Verenigde_State_van_Amerika
 55.79539        Suid-Afrika
 
-hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 3
-tail -n 100 part-r-00000
-tail -n 100 1
-tail -n 100 2
-tail -n 100 3
-cd ..
-
-
+    hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 3
+    tail -n 100 part-r-00000
+    tail -n 100 1
+    tail -n 100 2
+    tail -n 100 3
+    cd ..
 
 Step 7. When your code seems to be working satisfactorily, you should unzip the large xml file with the following command:
 
-hadoop fs -copyFromLocal /homes/dcaragea/WikiProject/* input/HadoopPageRank/wiki
+    hadoop fs -copyFromLocal /homes/dcaragea/WikiProject/* input/HadoopPageRank/wiki
 
 16/11/18 05:05:45 INFO hdfs.DFSClient: Exception in createBlockOutputStream
 java.io.IOException: Bad connect ack with firstBadLink as 10.5.42.12:50010
@@ -99,5 +102,7 @@ java.io.IOException: Bad connect ack with firstBadLink as 10.5.42.12:50010
 Note: This may take some time.
 
 Step 8. Copy the unzipped xml document to the input/HadoopPageRank/wiki directory in hdfs as in step 3.
+
 Step 9. Make sure the output/HadoopPageRank directory in hdfs is clear as in step 4.
+
 Step 10. Re-run the hadoop job as in step 5.
