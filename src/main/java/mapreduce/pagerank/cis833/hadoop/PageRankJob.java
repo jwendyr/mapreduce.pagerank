@@ -28,13 +28,17 @@ public class PageRankJob extends Configured implements Tool {
     private static NumberFormat nf = new DecimalFormat("00");
 
     public static void main(String[] args) throws Exception {
+        if (args.length < 2) {
+            System.err.println("Usage: PageRank <input> <output>");
+            System.exit(1);
+        }
         System.exit(ToolRunner.run(new Configuration(), new PageRankJob(), args));
     }
 
     @Override
     public int run(String[] args) throws Exception {
         //Run the first MapReduce Job, parsing links from the large dump of wikipedia pages
-        boolean isCompleted = runXmlParsing("input/HadoopPageRank/wiki", "output/HadoopPageRank/ranking/iter00");
+        boolean isCompleted = runXmlParsing(args[0], args[1]+"/ranking/iter00");
         if (!isCompleted) return 1;
         //if (!isCompleted){
         String lastResultPath = null;
@@ -42,15 +46,15 @@ public class PageRankJob extends Configured implements Tool {
         //Run the second MapReduce Job, calculating new pageranks from existing values
         //Run this job several times, with each iteration the pagerank value will become more accurate
         for (int runs = 0; runs <= 9; runs++) {
-            String inPath = "output/HadoopPageRank/ranking/iter" + nf.format(runs);
-            lastResultPath = "output/HadoopPageRank/ranking/iter" + nf.format(runs + 1);
+            String inPath = args[1]+"/ranking/iter" + nf.format(runs);
+            lastResultPath = "args[1]+"/ranking/iter" + nf.format(runs + 1);
 
             isCompleted = runRankCalculator(inPath, lastResultPath);
 
             if (!isCompleted) return 1;
         }
 
-        isCompleted = runRankSorter(lastResultPath, "output/HadoopPageRank/result");
+        isCompleted = runRankSorter(lastResultPath, args[1]+"/result");
 
         if (!isCompleted) return 1;//}
         return 0;
