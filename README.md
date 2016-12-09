@@ -39,7 +39,7 @@ Checking connectivity... done.
     unzip afwiki-20091002-one-page-per-line.zip
     hadoop fs -copyFromLocal afwiki-20091002-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
 
-    ls /home/dcaragea/WikiProject
+    ls /homes/dcaragea/WikiProject
     hadoop fs -copyFromLocal /homes/dcaragea/WikiProject/* input/HadoopPageRank/wiki
     hadoop fs -ls input/HadoopPageRank/wiki
 
@@ -125,7 +125,6 @@ Note: This may take some time.
     hadoop fs -copyFromLocal scowiki-20090929-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
     hadoop fs -rm -r output/HadoopPageRank/*
     cd target/
-    spark-submit --class com.spark.pagerank.cis833.extra.SparkPageRank --master yarn cis833.extra-1.0.jar input/HadoopPageRank/wiki/wiki.xml
-
+    spark-submit --class com.spark.pagerank.cis833.extra.SparkPageRank --master yarn cis833.extra-1.0.jar graph/1
     hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 1
     tail -n 100 1
