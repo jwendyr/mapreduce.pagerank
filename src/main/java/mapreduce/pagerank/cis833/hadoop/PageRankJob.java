@@ -38,7 +38,7 @@ public class PageRankJob extends Configured implements Tool {
         if (!isCompleted) return 1;
 
         String lastResultPath = null;
-
+        return 1;
         //Run the second MapReduce Job, calculating new pageranks from existing values
         //Run this job several times, with each iteration the pagerank value will become more accurate
         for (int runs = 0; runs <= 9; runs++) {
