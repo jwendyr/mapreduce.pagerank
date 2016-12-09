@@ -109,7 +109,7 @@ public class PageLinksParseMapper extends Mapper<LongWritable, Text, Text, Text>
 
     private boolean isInvalidLink(String link) {
         int minLength = 1;
-        int maxLength = 100;
+        int maxLength = 2048;
 
         if( link.length() < minLength || link.length() > maxLength) return true;
         char firstChar = link.charAt(0);
