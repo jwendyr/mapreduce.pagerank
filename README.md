@@ -51,7 +51,7 @@ Checking connectivity... done.
 **Step 5**. Run the hadoop jar with the following command:
     
     cd target/
-    yarn jar cis833.hadoop-1.0-SNAPSHOT.jar mapreduce.pagerank.PageRankJob
+    yarn jar cis833.hadoop-1.0-SNAPSHOT.jar mapreduce.pagerank.PageRankJob input/HadoopPageRank/wiki output/HadoopPageRank
 
 **Step 6**. When the hadoop execution has completed, you may get your results out from hdfs with the following command:
 
