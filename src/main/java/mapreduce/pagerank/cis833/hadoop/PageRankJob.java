@@ -47,7 +47,7 @@ public class PageRankJob extends Configured implements Tool {
         //Run this job several times, with each iteration the pagerank value will become more accurate
         for (int runs = 0; runs <= 9; runs++) {
             String inPath = args[1]+"/ranking/iter" + nf.format(runs);
-            lastResultPath = "args[1]+"/ranking/iter" + nf.format(runs + 1);
+            lastResultPath = args[1]+"/ranking/iter" + nf.format(runs + 1);
 
             isCompleted = runRankCalculator(inPath, lastResultPath);
 
