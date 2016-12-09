@@ -101,9 +101,7 @@ Checking connectivity... done.
 
     cd ..
 
-**Step 7**. When your code seems to be working satisfactorily, try large file with the following command:
-
-    hadoop fs -copyFromLocal /homes/dcaragea/WikiProject/* input/HadoopPageRank/wiki
+**sometimes error show up on beocat**
 
 16/11/18 05:05:45 INFO hdfs.DFSClient: Exception in createBlockOutputStream
 java.io.IOException: Bad connect ack with firstBadLink as 10.5.42.12:50010
@@ -113,10 +111,9 @@ java.io.IOException: Bad connect ack with firstBadLink as 10.5.42.12:50010
 16/11/18 05:05:45 INFO hdfs.DFSClient: Abandoning BP-130976981-10.5.3.30-1463579955828:blk_1073791070_85266
 16/11/18 05:05:45 INFO hdfs.DFSClient: Excluding datanode DatanodeInfoWithStorage[10.5.42.12:50010,DS-48aefdc4-724c-4e80-803e-c6e92b5bf2a0,DISK]
 
-Note: This may take some time.
-
-**Step 8**. Spark
-   [go to this github link] (https://github.com/jwendyr/spark.pagerank)
+**Spark**
+    for input for graph in Spark only use mapper for parsing and turn of reduce. job.setNumReduceTasks(0)
+    [go to this github link] (https://github.com/jwendyr/spark.pagerank)
 
     rm -rf spark.pagerank/
     git clone https://github.com/jwendyr/spark.pagerank.git
