@@ -125,6 +125,6 @@ Note: This may take some time.
     hadoop fs -copyFromLocal scowiki-20090929-one-page-per-line input/HadoopPageRank/wiki/wiki.xml
     hadoop fs -rm -r output/HadoopPageRank/*
     cd target/
-    spark-submit --class com.spark.pagerank.cis833.extra.SparkPageRank --master yarn cis833.extra-1.0.jar graph/1
+    spark-submit --class com.spark.cis833.extra.SparkPageRank --master yarn cis833.extra-0.0.1-SNAPSHOT.jar graph/1 10
     hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 1
     tail -n 100 1
