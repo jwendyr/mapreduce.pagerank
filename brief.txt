@@ -1,0 +1,60 @@
+Briefly describes the functionality of your program (main classes/data structures
+you used in your implementation).
+Mapreduce: It contain 1 driver program and map and reduce and use only HDFS as data structure, the parsing part use XMLinputformat. (hardcoding the directory and file just for convienence purpose)
+Spark: it contain only 1 java file, it is using less code then Mapreduce and implement Pagerank in straigh forward manner. Lot of lesson lean using JavaRDD. The implementation could be more comprehensive in Scala. It run faster then mapreduce. But lot of time out in large data set
+
+• List the map/reduce jobs in your code. For each map/reduce job, describe the
+inputs and the outputs (to map and reduce methods, respectively).
+• Describe the data types you used for keys and values in the various MapReduce
+stages
+
+Mapreduce
+parse
+wikipedia xml parse:XmlInputFormat ->PageLinksParseMapper-> <title,title> ->PageLinksParseReducer-> <title,{PR title1,title2}>*
+calculate
+* ->RankCalculateMapper-> <title, {title PR L}> / {title, ! title1,title2}> -> RankCalculateReducer -> (title, {PR title,title})*
+rank
+* -> RankSortMapper.java -> <PR, title>
+Spark
+
+Use Pregel (until convergence) or GraphX cannot run on beocat (not included because it can't compile)
+
+ var PR = Array.fill(n)( 1.0 )
+ val oldPR = Array.fill(n)( 0.0 )
+ while( max(abs(PR - oldPr)) > tol ) {
+   swap(oldPR, PR)
+   for( i <- 0 until n if abs(PR[i] - oldPR[i]) > tol ) {
+     PR[i] = alpha + (1 - \alpha) * inNbrs[i].map(j => oldPR[j] / outDeg[j]).sum
+   }
+ }
+
+• Explains how to run your program (standalone mode and Beocat) and show proof
+that your program does what it’s supposed to do in both cases.
+the program use maven (this helps alot) to compile. Modification is made on pom.xml. The detail
+instruction is in Readme.md of github.
+
+• Include a discussion section that comments on your whole experience with this
+assignment, any lessons learned, or any issues left as open questions.
+The main reason of the assigment is tampered by lacks of realiable information to complete the program.
+It should be more focused on the main concept and make sure the instruction is closely fitted to the development environment
+
+• How long did it take you to complete this assignment? What was the most
+challenging part of the assignment?
+It takes a lot of hour to find the example and tutorial or resources that mention about topic.
+Most of the time is trying to find configuration and setting that works. Lots of trial and error.
+Most of the information is not uptodate. Difference in version and even simple testing program does not work makes it difficult to progress.
+
+• Describe how you tested your code before running on the large data set. Did you
+find any tricky or surprising bugs?
+*Mapreduce: No.1 and 2 is tested on cloudera vm (It takes a while to find a way to run the VM on PC/windows, (fixed by turning off virtualization). Ecounter an invalid like in larger data set that prevent the program to finished. Make modification on parsing to fix that (not easy to debug).
+*Spark: not able to use SparkSession and get GraphX to run, forced to change to older way
+Copy back and forth in HDFS is not very cumbersome.
+
+• What are the 10 pages with the highest PageRank? Does that surprise you?
+Why/why not?
+* The 10 highest rank page was posted on github page together with the instruction to run.
+All pages with highest pagerank is country and country near main country pages that is closedly related to the main language that is used in the page. It does not suprised me because it is obvious.
+
+• Acknowledge any code you may have used or any resources that you may have
+consulted in order to complete your assignment.
+*look at resource.txt and resource folder
