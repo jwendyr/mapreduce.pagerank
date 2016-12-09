@@ -36,7 +36,7 @@ public class PageRankJob extends Configured implements Tool {
         //Run the first MapReduce Job, parsing links from the large dump of wikipedia pages
         boolean isCompleted = runXmlParsing("input/HadoopPageRank/wiki", "output/HadoopPageRank/ranking/iter00");
         if (!isCompleted) return 1;
-        if (isCompleted){
+        if (!isCompleted){
         String lastResultPath = null;
     
         //Run the second MapReduce Job, calculating new pageranks from existing values
