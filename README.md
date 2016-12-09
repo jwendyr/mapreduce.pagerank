@@ -112,7 +112,7 @@ java.io.IOException: Bad connect ack with firstBadLink as 10.5.42.12:50010
 16/11/18 05:05:45 INFO hdfs.DFSClient: Excluding datanode DatanodeInfoWithStorage[10.5.42.12:50010,DS-48aefdc4-724c-4e80-803e-c6e92b5bf2a0,DISK]
 
 **Spark**
-    for input for graph in Spark only use mapper for parsing and turn of reduce. job.setNumReduceTasks(0)
+    input for graph in Spark only use mapper for parsing and turn of reduce. job.setNumReduceTasks(0)
     [go to this github link] (https://github.com/jwendyr/spark.pagerank)
 
     rm -rf spark.pagerank/
