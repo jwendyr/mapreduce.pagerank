@@ -36,7 +36,7 @@ public class PageRankJob extends Configured implements Tool {
         //Run the first MapReduce Job, parsing links from the large dump of wikipedia pages
         boolean isCompleted = runXmlParsing("input/HadoopPageRank/wiki", "output/HadoopPageRank/ranking/iter00");
         if (!isCompleted) return 1;
-        if (!isCompleted){
+        //if (!isCompleted){
         String lastResultPath = null;
     
         //Run the second MapReduce Job, calculating new pageranks from existing values
@@ -52,7 +52,7 @@ public class PageRankJob extends Configured implements Tool {
 
         isCompleted = runRankSorter(lastResultPath, "output/HadoopPageRank/result");
 
-        if (!isCompleted) return 1;}
+        if (!isCompleted) return 1;//}
         return 0;
     }
 
@@ -81,7 +81,7 @@ public class PageRankJob extends Configured implements Tool {
         xmlParser.setOutputKeyClass(Text.class);
         xmlParser.setOutputValueClass(Text.class);
         xmlParser.setReducerClass(PageLinksParseReducer.class);
-        xmlParser.setNumReduceTasks(0);
+        //xmlParser.setNumReduceTasks(0);
 
         return xmlParser.waitForCompletion(true);
     }
