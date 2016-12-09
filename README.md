@@ -116,6 +116,7 @@ java.io.IOException: Bad connect ack with firstBadLink as 10.5.42.12:50010
 Note: This may take some time.
 
 **Step 8**. Spark
+   [go to this github link] (https://github.com/jwendyr/spark.pagerank)
 
     rm -rf spark.pagerank/
     git clone https://github.com/jwendyr/spark.pagerank.git
