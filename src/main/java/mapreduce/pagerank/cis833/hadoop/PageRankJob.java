@@ -66,6 +66,7 @@ public class PageRankJob extends Configured implements Tool {
         conf.set(XmlInputFormat.END_TAG_KEY, "</page>");
 
         Job xmlParser = Job.getInstance(conf, "xmlParser");
+        
         xmlParser.setJarByClass(PageRankJob.class);
 
         // Input -> Mapper -> Map
@@ -80,6 +81,7 @@ public class PageRankJob extends Configured implements Tool {
         xmlParser.setOutputKeyClass(Text.class);
         xmlParser.setOutputValueClass(Text.class);
         xmlParser.setReducerClass(PageLinksParseReducer.class);
+        xmlParser.setNumReduceTasks(0);
 
         return xmlParser.waitForCompletion(true);
     }
