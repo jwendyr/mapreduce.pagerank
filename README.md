@@ -57,6 +57,7 @@ Checking connectivity... done.
 
     hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 1
     tail -n 100 1
+
 5.6457105       Unitit_States
 5.8568          Scots_leid
 5.949724        Northren_Ireland
@@ -71,6 +72,7 @@ Checking connectivity... done.
 
     hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 2
     tail -n 100 2
+
 17.83002        Verenigde_Koninkryk
 17.880821       Gregoriaanse_kalender
 18.177961       Italië
@@ -84,6 +86,7 @@ Checking connectivity... done.
 
     hadoop fs -copyToLocal output/HadoopPageRank/result/part-r-00000 3
     tail -n 100 3
+
 761.6818        United_Kingdom
 775.1779        Italy
 902.53705       Canada
